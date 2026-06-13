@@ -4,23 +4,24 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Phase 1: Design System & UI Primitives
+- Phase 2: Editor Chrome — Navbar & Sidebar Shell
 
 ## Current Goal
 
-- Define the next feature to implement.
+- Wire `EditorNavbar` and `ProjectSidebar` into an editor page layout.
 
 ## Completed
 
 - `01-design-system`: shadcn/ui initialized for Tailwind v4; Button, Card, Dialog, Input, Tabs, Textarea, ScrollArea added to `components/ui/`; `lucide-react` installed; `lib/utils.ts` with `cn()` created; `globals.css` configured with full dark theme CSS variables and project design tokens; `layout.tsx` applies `dark` class to `<html>`.
+- `02-editor`: `components/editor/editor-navbar.tsx` — fixed-height top navbar (h-12, z-40) with sidebar toggle using `PanelLeftOpen`/`PanelLeftClose` icons; accepts `isSidebarOpen` and `onSidebarToggle` props. `components/editor/project-sidebar.tsx` — floating overlay sidebar (z-50, w-72) that slides in from left without pushing content; accepts `isOpen` and `onClose` props; header with "Projects" title + close button; shadcn `Tabs` with "My Projects" / "Shared" tabs showing empty placeholder state; full-width "New Project" button with `Plus` icon at bottom. Dialog pattern ready for future use via existing shadcn `Dialog` component and color tokens in `globals.css`.
 
 ## In Progress
 
-- None yet.
+- None.
 
 ## Next Up
 
-- Add the next planned feature unit here.
+- Create an editor page route that composes `EditorNavbar` + `ProjectSidebar` with shared `isOpen` state.
 
 ## Open Questions
 
