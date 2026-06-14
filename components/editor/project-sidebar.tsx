@@ -16,13 +16,16 @@ export function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
       className={`fixed top-0 left-0 z-50 h-full w-72 flex flex-col bg-surface border-r border-surface-border transition-transform duration-200 ease-in-out ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
+      aria-hidden={!isOpen}
+      inert={!isOpen}
     >
-      <div className="flex items-center justify-between px-4 h-12 border-b border-surface-border shrink-0">
+      <div id="project-sidebar" className="flex items-center justify-between px-4 h-12 border-b border-surface-border shrink-0">
         <span className="text-sm font-medium text-copy-primary">Projects</span>
         <Button
           variant="ghost"
           size="icon"
           onClick={onClose}
+          aria-label="Close project sidebar"
           className="h-7 w-7 text-copy-muted hover:text-copy-primary hover:bg-elevated"
         >
           <X className="h-4 w-4" />
