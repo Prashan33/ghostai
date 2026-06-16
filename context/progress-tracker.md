@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Phase 3: Auth — Clerk wired into the app
+- Phase 4: Project Dialogs — editor home screen and project CRUD dialogs
 
 ## Current Goal
 
-- Fully functional auth: protected routes, sign-in/sign-up pages, UserButton in editor navbar, root redirect.
+- Editor home with New Project button; Create / Rename / Delete dialogs wired to sidebar and home; mock project data in sidebar with owned-only actions; mobile backdrop scrim.
 
 ## Completed
 
@@ -18,7 +18,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## In Progress
 
-- None.
+- `04-project-dialogs`: editor home screen (`components/editor/editor-home.tsx`), three dialogs (`components/editor/project-dialogs.tsx`), hook (`hooks/use-project-dialogs.ts`) with dialog/form/loading state and mock data; sidebar updated with project items and rename/delete actions for owned projects, mobile backdrop scrim; all wired through `editor-shell.tsx`.
 
 ## Next Up
 
