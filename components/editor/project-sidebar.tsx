@@ -1,22 +1,19 @@
 "use client";
 
 import { X, Plus, Pencil, Trash2 } from "lucide-react";
-import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  MOCK_MY_PROJECTS,
-  MOCK_SHARED_PROJECTS,
-  type MockProject,
-} from "@/hooks/use-project-dialogs";
+import type { ProjectData } from "@/lib/projects";
 
 interface ProjectSidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  ownedProjects: ProjectData[];
+  sharedProjects: ProjectData[];
   onNewProject: () => void;
-  onRenameProject: (project: MockProject) => void;
-  onDeleteProject: (project: MockProject) => void;
+  onRenameProject: (project: ProjectData) => void;
+  onDeleteProject: (project: ProjectData) => void;
 }
 
 function ProjectItem({
@@ -24,9 +21,9 @@ function ProjectItem({
   onRename,
   onDelete,
 }: {
-  project: MockProject;
-  onRename?: (p: MockProject) => void;
-  onDelete?: (p: MockProject) => void;
+  project: ProjectData;
+  onRename?: (p: ProjectData) => void;
+  onDelete?: (p: ProjectData) => void;
 }) {
   return (
     <div className="group flex items-center px-4 py-2 hover:bg-elevated cursor-pointer">
@@ -34,8 +31,7 @@ function ProjectItem({
         {project.name}
       </span>
 
-      {/* Dot + action icons — all appear together on hover, dot acts as separator */}
-      {project.isOwned && onRename && onDelete && (
+      {onRename && onDelete && (
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
           <div className="h-1.5 w-1.5 rounded-full bg-brand" />
           <Button
@@ -65,6 +61,8 @@ function ProjectItem({
 export function ProjectSidebar({
   isOpen,
   onClose,
+  ownedProjects,
+  sharedProjects,
   onNewProject,
   onRenameProject,
   onDeleteProject,
@@ -120,13 +118,13 @@ export function ProjectSidebar({
 
           <TabsContent value="my-projects" className="flex-1 min-h-0 mt-0">
             <ScrollArea className="h-full">
-              {MOCK_MY_PROJECTS.length === 0 ? (
+              {ownedProjects.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
                   <p className="text-sm text-copy-muted">No projects yet.</p>
                 </div>
               ) : (
                 <div className="flex flex-col gap-0.5 py-2">
-                  {MOCK_MY_PROJECTS.map((project) => (
+                  {ownedProjects.map((project) => (
                     <ProjectItem
                       key={project.id}
                       project={project}
@@ -141,13 +139,13 @@ export function ProjectSidebar({
 
           <TabsContent value="shared" className="flex-1 min-h-0 mt-0">
             <ScrollArea className="h-full">
-              {MOCK_SHARED_PROJECTS.length === 0 ? (
+              {sharedProjects.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
                   <p className="text-sm text-copy-muted">No shared projects.</p>
                 </div>
               ) : (
                 <div className="flex flex-col gap-0.5 py-2">
-                  {MOCK_SHARED_PROJECTS.map((project) => (
+                  {sharedProjects.map((project) => (
                     <ProjectItem key={project.id} project={project} />
                   ))}
                 </div>
@@ -156,11 +154,10 @@ export function ProjectSidebar({
           </TabsContent>
         </Tabs>
 
-        {/* Footer: user avatar + new project */}
-        <div className="p-3 border-t border-surface-border shrink-0 flex items-center gap-2">
-          <UserButton />
+        {/* Footer: new project */}
+        <div className="p-3 border-t border-surface-border shrink-0">
           <Button
-            className="flex-1 gap-1.5 text-sm h-8"
+            className="w-full gap-1.5 text-sm h-8"
             onClick={onNewProject}
           >
             <Plus className="h-4 w-4" />

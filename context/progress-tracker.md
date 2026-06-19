@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Phase 4: Project Dialogs — editor home screen and project CRUD dialogs
+- Phase 7 complete: Editor home wired to real project API
 
 ## Current Goal
 
-- Editor home with New Project button; Create / Rename / Delete dialogs wired to sidebar and home; mock project data in sidebar with owned-only actions; mobile backdrop scrim.
+- Wire editor page content: canvas or placeholder for the actual writing surface.
 
 ## Completed
 
@@ -17,9 +17,15 @@ Update this file whenever the current phase, active feature, or implementation s
 - `03-auth`: `ClerkProvider` wraps root layout with `dark` theme from `@clerk/ui/themes`; Clerk appearance variables overridden via CSS custom properties (no hardcoded colors). `proxy.ts` at project root protects all routes except sign-in/sign-up (paths read from env vars). `/` redirects authenticated users to `/editor` and unauthenticated users to `/sign-in`. Sign-in and sign-up pages use a two-panel layout on large screens (left: logo + tagline + feature list; right: Clerk form) and form-only on small screens — no gradients, no hero sections. `UserButton` added to editor navbar right section. `/editor` page route created using `EditorShell`.
 - `05-prisma`: `prisma/models/project.prisma` — `Project` (ownerId, name, description?, status enum DRAFT/ARCHIVED, canvasJsonPath?, timestamps, indexes on ownerId and createdAt) and `ProjectCollaborator` (projectId with cascade delete, email, createdAt, unique on projectId/email, indexes on email and projectId/createdAt). `lib/prisma.ts` — cached singleton; branches on `DATABASE_URL` prefix: `prisma+postgres://` uses `{ accelerateUrl }`, otherwise uses `@prisma/adapter-pg` via `{ adapter: new PrismaPg({ connectionString }) }`. Generated client at `app/generated/prisma/`. Migration `20260616051745_add_project_models` applied. `npm run build` passes.
 
-## In Progress
+- `06-project-apis`: `app/api/projects/route.ts` — `GET` lists the authenticated user's projects ordered by `createdAt` desc; `POST` creates a project with `ownerId` set to the Clerk user ID, defaulting `name` to `"Untitled Project"`. `app/api/projects/[projectId]/route.ts` — `PATCH` renames a project (requires non-empty `name`); `DELETE` deletes a project; both enforce owner-only access returning `403` for non-owners and `401` for unauthenticated requests. `npm run build` passes.
 
 - `04-project-dialogs`: editor home screen (`components/editor/editor-home.tsx`), three dialogs (`components/editor/project-dialogs.tsx`), hook (`hooks/use-project-dialogs.ts`) with dialog/form/loading state and mock data; sidebar updated with project items and rename/delete actions for owned projects, mobile backdrop scrim; all wired through `editor-shell.tsx`.
+
+- `07-wire-editor-home`: `lib/projects.ts` — server-side `getOwnedProjects` and `getSharedProjects` helpers using Prisma + Clerk auth; `ProjectData` interface (`{ id, name }`). `hooks/use-project-actions.ts` — replaced mock hook with real mutations: create (POST → navigate to `/editor/[id]`), rename (PATCH → refresh), delete (DELETE → redirect if active, else refresh); generates slug+suffix room ID preview. `app/editor/page.tsx` — now an async server component that fetches both project lists and passes them to `EditorShell`. `editor-shell.tsx` accepts `ownedProjects`/`sharedProjects` props and uses `useProjectActions`. `project-sidebar.tsx` — removed mock data imports, reads real project lists from props. `project-dialogs.tsx` — wired `onConfirm`/`isLoading` to all three dialogs; create dialog shows room ID preview; rename pre-fills name; delete shows project name; loading states disable inputs and buttons. `npm run build` passes.
+
+## In Progress
+
+
 
 ## Next Up
 

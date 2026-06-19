@@ -10,27 +10,34 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogClose,
 } from "@/components/ui/dialog";
-import type { MockProject } from "@/hooks/use-project-dialogs";
+import type { ProjectData } from "@/lib/projects";
 
 // ── Create Project ──────────────────────────────────────────────────────────
 
 interface CreateProjectDialogProps {
   open: boolean;
   name: string;
-  slug: string;
+  roomId: string;
   onNameChange: (value: string) => void;
+  isLoading: boolean;
+  onConfirm: () => void;
   onClose: () => void;
 }
 
 export function CreateProjectDialog({
   open,
   name,
-  slug,
+  roomId,
   onNameChange,
+  isLoading,
+  onConfirm,
   onClose,
 }: CreateProjectDialogProps) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter" && name.trim() && !isLoading) onConfirm();
+  }
+
   return (
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <DialogContent className="rounded-3xl" showCloseButton={false}>
@@ -46,21 +53,23 @@ export function CreateProjectDialog({
             placeholder="Project name"
             value={name}
             onChange={(e) => onNameChange(e.target.value)}
+            onKeyDown={handleKeyDown}
             autoFocus
+            disabled={isLoading}
           />
-          {name.trim() && (
+          {roomId && (
             <p className="text-xs text-copy-muted">
-              Slug: <span className="text-copy-secondary font-mono">{slug}</span>
+              Room ID: <span className="text-copy-secondary font-mono">{roomId}</span>
             </p>
           )}
         </div>
 
         <DialogFooter className="rounded-b-3xl">
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" onClick={onClose} disabled={isLoading}>
             Cancel
           </Button>
-          <Button disabled={!name.trim()} onClick={onClose}>
-            Create project
+          <Button disabled={!name.trim() || isLoading} onClick={onConfirm}>
+            {isLoading ? "Creating…" : "Create project"}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -72,9 +81,11 @@ export function CreateProjectDialog({
 
 interface RenameProjectDialogProps {
   open: boolean;
-  project: MockProject | null;
+  project: ProjectData | null;
   name: string;
   onNameChange: (value: string) => void;
+  isLoading: boolean;
+  onConfirm: () => void;
   onClose: () => void;
 }
 
@@ -83,6 +94,8 @@ export function RenameProjectDialog({
   project,
   name,
   onNameChange,
+  isLoading,
+  onConfirm,
   onClose,
 }: RenameProjectDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -94,7 +107,7 @@ export function RenameProjectDialog({
   }, [open]);
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" && name.trim()) onClose();
+    if (e.key === "Enter" && name.trim() && !isLoading) onConfirm();
   }
 
   return (
@@ -116,15 +129,16 @@ export function RenameProjectDialog({
             value={name}
             onChange={(e) => onNameChange(e.target.value)}
             onKeyDown={handleKeyDown}
+            disabled={isLoading}
           />
         </div>
 
         <DialogFooter className="rounded-b-3xl">
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" onClick={onClose} disabled={isLoading}>
             Cancel
           </Button>
-          <Button disabled={!name.trim()} onClick={onClose}>
-            Rename
+          <Button disabled={!name.trim() || isLoading} onClick={onConfirm}>
+            {isLoading ? "Renaming…" : "Rename"}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -136,13 +150,17 @@ export function RenameProjectDialog({
 
 interface DeleteProjectDialogProps {
   open: boolean;
-  project: MockProject | null;
+  project: ProjectData | null;
+  isLoading: boolean;
+  onConfirm: () => void;
   onClose: () => void;
 }
 
 export function DeleteProjectDialog({
   open,
   project,
+  isLoading,
+  onConfirm,
   onClose,
 }: DeleteProjectDialogProps) {
   return (
@@ -158,11 +176,11 @@ export function DeleteProjectDialog({
         </DialogHeader>
 
         <DialogFooter className="rounded-b-3xl">
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" onClick={onClose} disabled={isLoading}>
             Cancel
           </Button>
-          <Button variant="destructive" onClick={onClose}>
-            Delete project
+          <Button variant="destructive" onClick={onConfirm} disabled={isLoading}>
+            {isLoading ? "Deleting…" : "Delete project"}
           </Button>
         </DialogFooter>
       </DialogContent>
