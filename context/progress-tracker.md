@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Phase 7 complete: Editor home wired to real project API
+- Phase 9 complete: Share dialog with collaborator management
 
 ## Current Goal
 
-- Wire editor page content: canvas or placeholder for the actual writing surface.
+- Add real canvas surface: Liveblocks + React Flow integration in the workspace.
 
 ## Completed
 
@@ -29,7 +29,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Wire editor page content: canvas or placeholder for the actual writing surface.
+- Add real canvas surface: Liveblocks + React Flow integration in the workspace.
+
+- `08-editor-workspace-shell`: `lib/project-access.ts` — `getCurrentIdentity` (userId + primary email via Clerk) and `getProjectAccess` (checks owner or collaborator). `components/editor/access-denied.tsx` — centered lock icon + message + link back to `/editor`. `components/editor/project-sidebar.tsx` — added optional `activeProjectId` prop; active item highlighted with left accent border. `components/editor/workspace-navbar.tsx` — fixed top navbar showing project name (centered), sidebar toggle (left), Share button + AI sidebar toggle (right). `components/editor/workspace-shell.tsx` — client shell managing sidebar/AI-sidebar state, composes `WorkspaceNavbar`, `ProjectSidebar`, canvas placeholder, AI sidebar placeholder, and project dialogs. `app/editor/[roomId]/page.tsx` — async server component: redirects unauthenticated users to `/sign-in`, shows `AccessDenied` for missing or unauthorized projects, renders `WorkspaceShell` with project context and project lists. `npm run build` passes.
+
+- `09-share-dialog`: `app/api/projects/[projectId]/collaborators/route.ts` — `GET` lists collaborators (accessible to owner or collaborator), enriches emails with Clerk display name + avatar via `getUserList`; `POST` invites a collaborator by email (owner only, returns 409 if already present); `DELETE` removes a collaborator by email (owner only). `components/editor/share-dialog.tsx` — client dialog: owner view shows email invite form + collaborator list with per-row remove buttons; collaborator view shows read-only list; all rows show Clerk avatar/name with email fallback; copy-link button with 2-second "Copied!" feedback. `workspace-navbar.tsx` — Share button enabled with `onShareClick` prop. `workspace-shell.tsx` — accepts `isOwner` prop, manages `isShareOpen` state, wires `ShareDialog`. `app/editor/[roomId]/page.tsx` — derives `isOwner` from `project.ownerId === userId` and passes to `WorkspaceShell`. `npm run build` passes.
 
 ## Open Questions
 
