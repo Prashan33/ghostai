@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Compass, Settings, Bot } from "lucide-react";
+import { Settings, Bot } from "lucide-react";
 import { WorkspaceNavbar } from "@/components/editor/workspace-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
 import {
@@ -10,6 +10,8 @@ import {
   DeleteProjectDialog,
 } from "@/components/editor/project-dialogs";
 import { ShareDialog } from "@/components/editor/share-dialog";
+import { CanvasWrapper } from "@/components/editor/canvas-wrapper";
+import { Canvas } from "@/components/editor/canvas";
 import { useProjectActions } from "@/hooks/use-project-actions";
 import type { ProjectData } from "@/lib/projects";
 
@@ -62,37 +64,10 @@ export function WorkspaceShell({
           />
         )}
 
-        {/* Canvas placeholder */}
-        <main
-          className="flex-1 flex flex-col items-center justify-center relative overflow-hidden bg-base"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        >
-          <div className="flex flex-col items-center gap-6 text-center max-w-[420px] px-8 relative z-10">
-            {/* Icon */}
-            <div className="flex items-center justify-center w-[60px] h-[60px] rounded-2xl bg-elevated border border-surface-border">
-              <Compass className="h-7 w-7 text-brand" />
-            </div>
-
-            {/* Labels */}
-            <div className="flex flex-col items-center gap-3">
-              <span className="text-[10px] font-mono tracking-[0.25em] text-copy-muted uppercase">
-                Workspace Shell
-              </span>
-              <h2 className="text-xl font-semibold text-copy-primary leading-snug">
-                Canvas and collaboration tooling land here next.
-              </h2>
-              <p className="text-sm text-copy-muted leading-relaxed">
-                This room is ready for the shared architecture canvas, durable AI
-                workflows, and real-time presence. For now, the shell is wired with
-                project context and navigation only.
-              </p>
-            </div>
-          </div>
-        </main>
+        {/* Collaborative canvas */}
+        <CanvasWrapper roomId={projectId}>
+          <Canvas />
+        </CanvasWrapper>
 
         {/* Right AI sidebar */}
         {isAISidebarOpen && (

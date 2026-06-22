@@ -42,7 +42,7 @@ export function CreateProjectDialog({
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <DialogContent className="rounded-3xl" showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>New project</DialogTitle>
+          <DialogTitle className="text-copy-primary">New project</DialogTitle>
           <DialogDescription>
             Give your project a name to get started.
           </DialogDescription>
@@ -50,6 +50,7 @@ export function CreateProjectDialog({
 
         <div className="flex flex-col gap-3 py-1">
           <Input
+            className="text-copy-primary"
             placeholder="Project name"
             value={name}
             onChange={(e) => onNameChange(e.target.value)}
@@ -114,7 +115,7 @@ export function RenameProjectDialog({
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <DialogContent className="rounded-3xl" showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>Rename project</DialogTitle>
+          <DialogTitle className="text-copy-primary">Rename project</DialogTitle>
           {project && (
             <DialogDescription>
               Renaming &ldquo;{project.name}&rdquo;
@@ -125,6 +126,7 @@ export function RenameProjectDialog({
         <div className="py-1">
           <Input
             ref={inputRef}
+            className="text-copy-primary"
             placeholder="Project name"
             value={name}
             onChange={(e) => onNameChange(e.target.value)}
@@ -167,7 +169,7 @@ export function DeleteProjectDialog({
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <DialogContent className="rounded-3xl" showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>Delete project</DialogTitle>
+          <DialogTitle className="text-copy-primary">Delete project</DialogTitle>
           {project && (
             <DialogDescription>
               &ldquo;{project.name}&rdquo; will be permanently deleted. This cannot be undone.

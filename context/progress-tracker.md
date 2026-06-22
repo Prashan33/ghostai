@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Phase 9 complete: Share dialog with collaborator management
+- Phase 12 complete: Shape panel — draggable shape toolbar, custom canvasNode renderer, canvas drop handler
 
 ## Current Goal
 
-- Add real canvas surface: Liveblocks + React Flow integration in the workspace.
+- Next: node editing (label, color, shape picker), edge styling, or AI sidebar wiring.
 
 ## Completed
 
@@ -29,11 +29,15 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Add real canvas surface: Liveblocks + React Flow integration in the workspace.
-
 - `08-editor-workspace-shell`: `lib/project-access.ts` — `getCurrentIdentity` (userId + primary email via Clerk) and `getProjectAccess` (checks owner or collaborator). `components/editor/access-denied.tsx` — centered lock icon + message + link back to `/editor`. `components/editor/project-sidebar.tsx` — added optional `activeProjectId` prop; active item highlighted with left accent border. `components/editor/workspace-navbar.tsx` — fixed top navbar showing project name (centered), sidebar toggle (left), Share button + AI sidebar toggle (right). `components/editor/workspace-shell.tsx` — client shell managing sidebar/AI-sidebar state, composes `WorkspaceNavbar`, `ProjectSidebar`, canvas placeholder, AI sidebar placeholder, and project dialogs. `app/editor/[roomId]/page.tsx` — async server component: redirects unauthenticated users to `/sign-in`, shows `AccessDenied` for missing or unauthorized projects, renders `WorkspaceShell` with project context and project lists. `npm run build` passes.
 
 - `09-share-dialog`: `app/api/projects/[projectId]/collaborators/route.ts` — `GET` lists collaborators (accessible to owner or collaborator), enriches emails with Clerk display name + avatar via `getUserList`; `POST` invites a collaborator by email (owner only, returns 409 if already present); `DELETE` removes a collaborator by email (owner only). `components/editor/share-dialog.tsx` — client dialog: owner view shows email invite form + collaborator list with per-row remove buttons; collaborator view shows read-only list; all rows show Clerk avatar/name with email fallback; copy-link button with 2-second "Copied!" feedback. `workspace-navbar.tsx` — Share button enabled with `onShareClick` prop. `workspace-shell.tsx` — accepts `isOwner` prop, manages `isShareOpen` state, wires `ShareDialog`. `app/editor/[roomId]/page.tsx` — derives `isOwner` from `project.ownerId === userId` and passes to `WorkspaceShell`. `npm run build` passes.
+
+- `10-liveblocks-setup`: `liveblocks.config.ts` — defines `Presence` (`cursor: { x: number; y: number } | null`, `isThinking: boolean`) and `UserMeta` (`id`, `info.name`, `info.avatar`, `info.color`). `lib/liveblocks.ts` — cached singleton `LiveblocksClient` wrapping the Liveblocks REST API (`/v2/rooms` and `/v2/rooms/{id}/authorize`); `getCursorColor(userId)` deterministically maps a user ID to one of 10 fixed hex colors via djb2-style hash. `app/api/liveblocks-auth/route.ts` — `POST` requires Clerk auth, extracts `room` from request body, verifies project access via `getProjectAccess`, fetches Clerk user info (name, avatar), generates cursor color, calls `ensureRoom` (ignores 409), issues a session token, returns `{ token }`; returns `403` for unauthorized access. `npm run build` passes.
+
+- `11-base-canvas`: `types/canvas.ts` — `NodeData` interface (`label`, `color`, `shape`); `CanvasNode` and `CanvasEdge` typed aliases; `NODE_COLORS` (8 fill/text pairs) and `NODE_SHAPES` (6 shape names). `components/editor/canvas-wrapper.tsx` — client component; `LiveblocksProvider` with `/api/liveblocks-auth`; `RoomProvider` with room ID and initial presence `{ cursor: null, isThinking: false }`; `ClientSideSuspense` with spinner loading state; `ErrorBoundaryCanvas` class component as error fallback. `components/editor/canvas.tsx` — client component; `useLiveblocksFlow<CanvasNode, CanvasEdge>({ suspense: true })`; `ReactFlow` with synced nodes/edges and change handlers, `ConnectionMode.Loose`, `fitView`, `colorMode="dark"`; `Background` with dot variant (gap 24, size 1); `MiniMap` with dark styling. `workspace-shell.tsx` — canvas placeholder replaced with `<CanvasWrapper roomId={projectId}><Canvas /></CanvasWrapper>`. `npm run build` passes.
+
+- `12-shape-panel`: `components/editor/canvas-node.tsx` — custom `canvasNode` renderer: simple bordered rectangle, 4 connection handles (top/right/bottom/left), centered label, fill/text color derived from `NODE_COLORS`. `components/editor/shape-panel.tsx` — floating pill toolbar (absolute, bottom-center, z-10) with draggable buttons for rectangle, diamond, circle, pill, cylinder, hexagon; drag payload `application/ghost-shape` JSON `{ shape, width, height }` with sensible defaults. `canvas.tsx` — registers `canvasNode` in `nodeTypes`; captures `ReactFlowInstance` via `onInit`; adds `onDragOver`/`onDrop` handlers on wrapper div; on drop parses payload, converts screen position to canvas coordinates with `rfInstance.screenToFlowPosition`, generates ID as `${shape}-${Date.now()}-${counter}`, creates node with empty label and default color, pushes via `onNodesChange([{ type: "add", item }])`; renders `<ShapePanel />`. `npm run build` passes.
 
 ## Open Questions
 
