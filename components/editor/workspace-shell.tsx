@@ -10,10 +10,12 @@ import {
   DeleteProjectDialog,
 } from "@/components/editor/project-dialogs";
 import { ShareDialog } from "@/components/editor/share-dialog";
+import { StarterTemplatesModal } from "@/components/editor/starter-templates-modal";
 import { CanvasWrapper } from "@/components/editor/canvas-wrapper";
 import { Canvas } from "@/components/editor/canvas";
 import { useProjectActions } from "@/hooks/use-project-actions";
 import type { ProjectData } from "@/lib/projects";
+import type { CanvasTemplate } from "@/components/editor/starter-templates";
 
 interface WorkspaceShellProps {
   projectName: string;
@@ -33,6 +35,8 @@ export function WorkspaceShell({
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isAISidebarOpen, setIsAISidebarOpen] = useState(true);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isTemplatesOpen, setIsTemplatesOpen] = useState(false);
+  const [pendingTemplate, setPendingTemplate] = useState<CanvasTemplate | null>(null);
   const actions = useProjectActions(projectId);
 
   return (
@@ -44,6 +48,7 @@ export function WorkspaceShell({
         isAISidebarOpen={isAISidebarOpen}
         onAISidebarToggle={() => setIsAISidebarOpen((prev) => !prev)}
         onShareClick={() => setIsShareOpen(true)}
+        onTemplatesClick={() => setIsTemplatesOpen(true)}
       />
 
       {/* Content area: fixed below navbar, flex row */}
@@ -66,7 +71,10 @@ export function WorkspaceShell({
 
         {/* Collaborative canvas */}
         <CanvasWrapper roomId={projectId}>
-          <Canvas />
+          <Canvas
+            importTemplate={pendingTemplate}
+            onTemplateImported={() => setPendingTemplate(null)}
+          />
         </CanvasWrapper>
 
         {/* Right AI sidebar */}
@@ -114,6 +122,11 @@ export function WorkspaceShell({
         )}
       </div>
 
+      <StarterTemplatesModal
+        open={isTemplatesOpen}
+        onClose={() => setIsTemplatesOpen(false)}
+        onImport={(tpl) => setPendingTemplate(tpl)}
+      />
       <ShareDialog
         open={isShareOpen}
         onClose={() => setIsShareOpen(false)}

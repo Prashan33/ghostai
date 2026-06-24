@@ -1,6 +1,6 @@
 "use client";
 
-import { PanelLeftClose, PanelLeftOpen, Share2, Bot } from "lucide-react";
+import { PanelLeftClose, PanelLeftOpen, Share2, Bot, LayoutTemplate } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,7 @@ interface WorkspaceNavbarProps {
   isAISidebarOpen: boolean;
   onAISidebarToggle: () => void;
   onShareClick: () => void;
+  onTemplatesClick: () => void;
 }
 
 export function WorkspaceNavbar({
@@ -21,6 +22,7 @@ export function WorkspaceNavbar({
   isAISidebarOpen,
   onAISidebarToggle,
   onShareClick,
+  onTemplatesClick,
 }: WorkspaceNavbarProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 h-12 flex items-center justify-between px-3 bg-surface border-b border-surface-border">
@@ -48,8 +50,18 @@ export function WorkspaceNavbar({
         </div>
       </div>
 
-      {/* Right: share + AI + user */}
+      {/* Right: templates + share + AI + user */}
       <div className="flex items-center gap-2">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onTemplatesClick}
+          className="h-8 gap-1.5 text-xs text-copy-secondary border border-surface-border hover:text-copy-primary"
+        >
+          <LayoutTemplate className="h-3.5 w-3.5" />
+          Templates
+        </Button>
+
         <Button
           variant="ghost"
           size="sm"
