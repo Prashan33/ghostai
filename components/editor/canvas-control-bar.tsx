@@ -1,6 +1,6 @@
 "use client";
 
-import { ZoomIn, ZoomOut, Maximize2, Undo2, Redo2 } from "lucide-react";
+import { ZoomIn, ZoomOut, Maximize2, Undo2, Redo2, Trash2 } from "lucide-react";
 
 interface RfZoomInstance {
   zoomIn: (options?: { duration?: number }) => void;
@@ -14,6 +14,8 @@ interface CanvasControlBarProps {
   canRedo: boolean;
   onUndo: () => void;
   onRedo: () => void;
+  hasSelection: boolean;
+  onDeleteSelected: () => void;
 }
 
 interface ControlButtonProps {
@@ -37,7 +39,7 @@ function ControlButton({ onClick, disabled = false, title, children }: ControlBu
   );
 }
 
-export function CanvasControlBar({ rfInstance, canUndo, canRedo, onUndo, onRedo }: CanvasControlBarProps) {
+export function CanvasControlBar({ rfInstance, canUndo, canRedo, onUndo, onRedo, hasSelection, onDeleteSelected }: CanvasControlBarProps) {
   return (
     <div
       className="absolute bottom-6 left-6 z-10 flex items-center gap-1 px-2 py-1.5 rounded-full pointer-events-auto"
@@ -87,6 +89,23 @@ export function CanvasControlBar({ rfInstance, canUndo, canRedo, onUndo, onRedo 
       >
         <Redo2 className="h-4 w-4" />
       </ControlButton>
+
+      {hasSelection && (
+        <>
+          <div
+            className="w-px h-5 mx-1"
+            style={{ background: "var(--border-default)" }}
+          />
+          <button
+            onClick={onDeleteSelected}
+            title="Delete selected (Delete)"
+            className="flex items-center justify-center w-8 h-8 rounded-lg transition-colors duration-150 hover:bg-[#ff6b6b22] active:bg-[#ff6b6b33]"
+            style={{ color: "#ff6b6b" }}
+          >
+            <Trash2 className="h-4 w-4" />
+          </button>
+        </>
+      )}
     </div>
   );
 }

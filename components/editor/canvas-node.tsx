@@ -97,7 +97,7 @@ export function CanvasNodeRenderer({ id, data, selected }: NodeProps<CanvasNode>
   );
 
   const labelOverlay = (
-    <div className="absolute inset-0 flex items-center justify-center px-3">
+    <div className="absolute inset-0 flex items-center justify-center px-3 pointer-events-none">
       {isEditing ? (
         <textarea
           ref={textareaRef}
@@ -113,14 +113,14 @@ export function CanvasNodeRenderer({ id, data, selected }: NodeProps<CanvasNode>
           onMouseDown={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
           onDoubleClick={(e) => e.stopPropagation()}
-          className="nodrag nopan w-full resize-none bg-transparent text-sm font-medium text-center outline-none border-none overflow-hidden"
+          className="nodrag nopan pointer-events-auto w-full resize-none bg-transparent text-sm font-medium text-center outline-none border-none overflow-hidden"
           style={{ color: pair.text, lineHeight: "1.4" }}
           placeholder="Label"
         />
       ) : (
         <span
           style={{ color: data.label ? pair.text : PLACEHOLDER_COLOR }}
-          className="text-sm font-medium text-center wrap-break-word cursor-default select-none"
+          className="pointer-events-auto text-sm font-medium text-center wrap-break-word cursor-default select-none"
           onDoubleClick={startEditing}
         >
           {data.label || "Label"}

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Settings, Bot } from "lucide-react";
+import { useRef, useState } from "react";
 import { WorkspaceNavbar } from "@/components/editor/workspace-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
 import {
@@ -13,9 +12,11 @@ import { ShareDialog } from "@/components/editor/share-dialog";
 import { StarterTemplatesModal } from "@/components/editor/starter-templates-modal";
 import { CanvasWrapper } from "@/components/editor/canvas-wrapper";
 import { Canvas } from "@/components/editor/canvas";
+import { AISidebar } from "@/components/editor/ai-sidebar";
 import { useProjectActions } from "@/hooks/use-project-actions";
 import type { ProjectData } from "@/lib/projects";
 import type { CanvasTemplate } from "@/components/editor/starter-templates";
+import type { SaveStatus } from "@/hooks/use-canvas-autosave";
 
 interface WorkspaceShellProps {
   projectName: string;
@@ -37,6 +38,8 @@ export function WorkspaceShell({
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isTemplatesOpen, setIsTemplatesOpen] = useState(false);
   const [pendingTemplate, setPendingTemplate] = useState<CanvasTemplate | null>(null);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
+  const saveFnRef = useRef<() => void>(() => {});
   const actions = useProjectActions(projectId);
 
   return (
@@ -49,6 +52,8 @@ export function WorkspaceShell({
         onAISidebarToggle={() => setIsAISidebarOpen((prev) => !prev)}
         onShareClick={() => setIsShareOpen(true)}
         onTemplatesClick={() => setIsTemplatesOpen(true)}
+        saveStatus={saveStatus}
+        onSave={() => saveFnRef.current()}
       />
 
       {/* Content area: fixed below navbar, flex row */}
@@ -72,53 +77,17 @@ export function WorkspaceShell({
         {/* Collaborative canvas */}
         <CanvasWrapper roomId={projectId}>
           <Canvas
+            projectId={projectId}
             importTemplate={pendingTemplate}
             onTemplateImported={() => setPendingTemplate(null)}
+            onSaveStatusChange={setSaveStatus}
+            onManualSaveReady={(fn) => { saveFnRef.current = fn; }}
           />
         </CanvasWrapper>
 
         {/* Right AI sidebar */}
         {isAISidebarOpen && (
-          <aside className="w-[320px] shrink-0 bg-surface border-l border-surface-border flex flex-col">
-            {/* Header */}
-            <div className="flex items-start justify-between px-4 py-3 border-b border-surface-border shrink-0">
-              <div>
-                <p className="text-sm font-semibold text-copy-primary">AI Copilot</p>
-                <p className="text-xs text-copy-muted mt-0.5">Placeholder panel</p>
-              </div>
-              <Settings className="h-4 w-4 text-copy-muted mt-0.5" />
-            </div>
-
-            {/* Content */}
-            <div className="flex-1 p-4 flex flex-col gap-4 overflow-y-auto">
-              {/* Chat surface pending card */}
-              <div className="rounded-2xl bg-elevated border border-surface-border p-4 flex gap-3">
-                <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-accent-dim shrink-0 mt-0.5">
-                  <Bot className="h-4 w-4 text-brand" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-copy-primary">
-                    Chat surface pending
-                  </p>
-                  <p className="text-xs text-copy-muted mt-1.5 leading-relaxed">
-                    The toggle is wired. Messaging and generation are intentionally
-                    out of scope here.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Future hooks footer */}
-            <div className="px-4 py-4 border-t border-surface-border shrink-0">
-              <p className="text-[10px] font-mono tracking-[0.2em] text-copy-muted uppercase mb-2">
-                Future Hooks
-              </p>
-              <p className="text-xs text-copy-muted leading-relaxed">
-                Prompt composer, run status, and architecture guidance will attach
-                to this sidebar.
-              </p>
-            </div>
-          </aside>
+          <AISidebar onClose={() => setIsAISidebarOpen(false)} />
         )}
       </div>
 

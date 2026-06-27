@@ -2,8 +2,10 @@
 
 import { useCallback, useState } from "react";
 import { useReactFlow } from "@xyflow/react";
+import { Trash2 } from "lucide-react";
 import { NODE_COLORS } from "@/types/canvas";
 import type { CanvasNode, CanvasEdge } from "@/types/canvas";
+import { useCanvasActions } from "@/components/editor/canvas";
 
 interface NodeColorToolbarProps {
   nodeId: string;
@@ -12,7 +14,17 @@ interface NodeColorToolbarProps {
 
 export function NodeColorToolbar({ nodeId, activeFill }: NodeColorToolbarProps) {
   const { updateNodeData } = useReactFlow<CanvasNode, CanvasEdge>();
+  const { deleteNodes } = useCanvasActions();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handleDelete = useCallback(
+    (e: React.PointerEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      deleteNodes([nodeId]);
+    },
+    [nodeId, deleteNodes],
+  );
 
   const handleSwatchClick = useCallback(
     (fill: string, e: React.MouseEvent) => {
@@ -80,6 +92,40 @@ export function NodeColorToolbar({ nodeId, activeFill }: NodeColorToolbarProps) 
             />
           );
         })}
+
+        <div style={{ width: 1, height: 14, background: "#2a2a30", flexShrink: 0 }} />
+
+        <button
+          type="button"
+          className="nodrag nopan"
+          style={{
+            width: 24,
+            height: 24,
+            borderRadius: 6,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            color: "#c0c0cc",
+            flexShrink: 0,
+            padding: 0,
+            transition: "color 0.15s ease, background 0.15s ease",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.color = "#ff6b6b";
+            (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,107,107,0.12)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.color = "#c0c0cc";
+            (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+          }}
+          onPointerDown={handleDelete}
+          aria-label="Delete node"
+        >
+          <Trash2 size={13} />
+        </button>
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 "use client";
 
 import { PanelLeftClose, PanelLeftOpen, Share2, Bot, LayoutTemplate } from "lucide-react";
-import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { SaveStatus } from "@/hooks/use-canvas-autosave";
 
 interface WorkspaceNavbarProps {
   projectName: string;
@@ -13,6 +13,15 @@ interface WorkspaceNavbarProps {
   onAISidebarToggle: () => void;
   onShareClick: () => void;
   onTemplatesClick: () => void;
+  saveStatus: SaveStatus;
+  onSave: () => void;
+}
+
+function saveButtonLabel(status: SaveStatus): string {
+  if (status === "saving") return "Saving...";
+  if (status === "saved") return "Saved";
+  if (status === "error") return "Error";
+  return "Save";
 }
 
 export function WorkspaceNavbar({
@@ -23,6 +32,8 @@ export function WorkspaceNavbar({
   onAISidebarToggle,
   onShareClick,
   onTemplatesClick,
+  saveStatus,
+  onSave,
 }: WorkspaceNavbarProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 h-12 flex items-center justify-between px-3 bg-surface border-b border-surface-border">
@@ -88,7 +99,20 @@ export function WorkspaceNavbar({
           AI
         </Button>
 
-        <UserButton />
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onSave}
+          disabled={saveStatus === "saving"}
+          className={cn(
+            "h-8 text-xs border border-surface-border",
+            saveStatus === "saved" && "text-state-success",
+            saveStatus === "error" && "text-state-error",
+            saveStatus !== "saved" && saveStatus !== "error" && "text-copy-secondary hover:text-copy-primary",
+          )}
+        >
+          {saveButtonLabel(saveStatus)}
+        </Button>
       </div>
     </header>
   );
