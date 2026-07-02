@@ -7,7 +7,7 @@ declare global {
 
 function createPrismaClient(): PrismaClient {
   return new PrismaClient({
-    accelerateUrl: process.env.DATABASE_URL,
+    accelerateUrl: process.env.DATABASE_URL!,
   })
 }
 

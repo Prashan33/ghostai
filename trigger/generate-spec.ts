@@ -64,7 +64,7 @@ export const generateSpecTask = schemaTask({
   run: async (payload) => {
     const { projectId, nodes, edges, chatHistory } = payload;
 
-    const prisma = new PrismaClient({ accelerateUrl: process.env.DATABASE_URL });
+    const prisma = new PrismaClient({ accelerateUrl: process.env.DATABASE_URL! });
 
     try {
     metadata.set("status", "starting").set("projectId", projectId);
