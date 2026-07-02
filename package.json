@@ -7,7 +7,8 @@
     "dev:trigger": "npx trigger.dev@latest dev",
     "db": "prisma dev",
     "migrate": "prisma migrate deploy",
-    "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
