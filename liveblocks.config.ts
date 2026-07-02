@@ -16,11 +16,24 @@ declare global {
       };
     };
 
-    RoomEvent: {};
+    RoomEvent: {
+      type: "ai:status";
+      message: string;
+    };
 
     ThreadMetadata: {};
 
     RoomInfo: {};
+
+    FeedMessageData: {
+      // ai-status-feed
+      text?: string;
+      // ai-chat
+      sender?: string;
+      role?: "user" | "assistant";
+      content?: string;
+      timestamp?: string;
+    };
   }
 }
 

@@ -68,9 +68,10 @@ interface CanvasProps {
   onTemplateImported?: () => void;
   onSaveStatusChange?: (status: SaveStatus) => void;
   onManualSaveReady?: (saveFn: () => void) => void;
+  onGetCanvasDataReady?: (fn: () => { nodes: CanvasNode[]; edges: CanvasEdge[] }) => void;
 }
 
-export function Canvas({ projectId, importTemplate, onTemplateImported, onSaveStatusChange, onManualSaveReady }: CanvasProps) {
+export function Canvas({ projectId, importTemplate, onTemplateImported, onSaveStatusChange, onManualSaveReady, onGetCanvasDataReady }: CanvasProps) {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect, onDelete } =
     useLiveblocksFlow<CanvasNode, CanvasEdge>({ suspense: true });
 
@@ -195,6 +196,12 @@ export function Canvas({ projectId, importTemplate, onTemplateImported, onSaveSt
   useEffect(() => {
     onManualSaveReady?.(save);
   }, [save, onManualSaveReady]);
+
+  useEffect(() => {
+    if (!onGetCanvasDataReady) return;
+    onGetCanvasDataReady(() => ({ nodes: nodesRef.current, edges: edgesRef.current }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onGetCanvasDataReady]);
 
   const updateMyPresence = useUpdateMyPresence();
 

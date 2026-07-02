@@ -40,6 +40,7 @@ export function WorkspaceShell({
   const [pendingTemplate, setPendingTemplate] = useState<CanvasTemplate | null>(null);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const saveFnRef = useRef<() => void>(() => {});
+  const getCanvasDataRef = useRef<() => { nodes: unknown[]; edges: unknown[] }>(() => ({ nodes: [], edges: [] }));
   const actions = useProjectActions(projectId);
 
   return (
@@ -74,7 +75,7 @@ export function WorkspaceShell({
           />
         )}
 
-        {/* Collaborative canvas */}
+        {/* Collaborative canvas + AI sidebar share the same Liveblocks room context */}
         <CanvasWrapper roomId={projectId}>
           <Canvas
             projectId={projectId}
@@ -82,13 +83,17 @@ export function WorkspaceShell({
             onTemplateImported={() => setPendingTemplate(null)}
             onSaveStatusChange={setSaveStatus}
             onManualSaveReady={(fn) => { saveFnRef.current = fn; }}
+            onGetCanvasDataReady={(fn) => { getCanvasDataRef.current = fn; }}
           />
+          {isAISidebarOpen && (
+            <AISidebar
+              onClose={() => setIsAISidebarOpen(false)}
+              projectId={projectId}
+              roomId={projectId}
+              getCanvasData={() => getCanvasDataRef.current()}
+            />
+          )}
         </CanvasWrapper>
-
-        {/* Right AI sidebar */}
-        {isAISidebarOpen && (
-          <AISidebar onClose={() => setIsAISidebarOpen(false)} />
-        )}
       </div>
 
       <StarterTemplatesModal

@@ -15,6 +15,7 @@ export function LiveCursors() {
 
         const name = other.info?.name ?? "Unknown";
         const color = other.info?.color ?? "#6457f9";
+        const thinking = other.presence.thinking;
 
         // Convert flow coordinates to screen coordinates within the canvas container.
         const screenX = cursor.x * zoom + vpX;
@@ -35,9 +36,15 @@ export function LiveCursors() {
               />
             </svg>
             <div
-              className="mt-0.5 ml-2 px-2 py-0.5 rounded-md text-[11px] font-medium whitespace-nowrap"
+              className="mt-0.5 ml-2 px-2 py-0.5 rounded-md text-[11px] font-medium whitespace-nowrap flex items-center gap-1"
               style={{ background: color, color: "#fff" }}
             >
+              {thinking && (
+                <span
+                  className="inline-block w-2.5 h-2.5 rounded-full border border-white/80 border-t-transparent animate-spin shrink-0"
+                  aria-label="thinking"
+                />
+              )}
               {name}
             </div>
           </div>

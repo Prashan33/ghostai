@@ -1,0 +1,134 @@
+{
+  "build": {
+  },
+  "cliPackageVersion": "4.4.6",
+  "config": {
+    "dirs": [
+      "./trigger"
+    ],
+    "project": "proj_nnlqfmepbhkhgrrhdwky"
+  },
+  "configPath": "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger.config.mjs",
+  "contentHash": "b49887f36f0e2d3223ec2de7ce48eb5e",
+  "customConditions": [
+  ],
+  "deploy": {
+    "env": {
+    }
+  },
+  "environment": "dev",
+  "externals": [
+    {
+      "name": "import-in-the-middle",
+      "version": "1.11.0"
+    }
+  ],
+  "files": [
+    {
+      "entry": "trigger/design-agent.ts",
+      "out": "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger/design-agent.mjs"
+    },
+    {
+      "entry": "trigger/generate-spec.ts",
+      "out": "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger/generate-spec.mjs"
+    }
+  ],
+  "indexWorkerEntryPoint": "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/.npm/_npx/f51a09bd0abf5f10/node_modules/trigger.dev/dist/esm/entryPoints/dev-index-worker.mjs",
+  "otelImportHook": {
+    "include": [
+    ]
+  },
+  "outputHashes": {
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/.npm/_npx/f51a09bd0abf5f10/node_modules/trigger.dev/dist/esm/entryPoints/dev-index-worker.mjs": "1QAbxcFRwZo",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/.npm/_npx/f51a09bd0abf5f10/node_modules/trigger.dev/dist/esm/entryPoints/dev-index-worker.mjs.map": "aaOO2Dudsxw",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/.npm/_npx/f51a09bd0abf5f10/node_modules/trigger.dev/dist/esm/entryPoints/dev-run-worker.mjs": "fOsR34IZ0rQ",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/.npm/_npx/f51a09bd0abf5f10/node_modules/trigger.dev/dist/esm/entryPoints/dev-run-worker.mjs.map": "T+qko51PeLo",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-3LKKYJ6F.mjs": "xCOmpS0lbYA",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-3LKKYJ6F.mjs.map": "kmICIhO/wq0",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-4HKZKBNS.mjs": "nswYlhFno40",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-4HKZKBNS.mjs.map": "qBGxkaJ6CsY",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-5AMOZM54.mjs": "zXMgeGGg488",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-5AMOZM54.mjs.map": "oRLLG+4nZd8",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-6L3DBTMP.mjs": "pnVzG1Cs3O8",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-6L3DBTMP.mjs.map": "JZmVvNwm4gI",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-CTDAWCTK.mjs": "pjmNPzgoVKg",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-CTDAWCTK.mjs.map": "922Py0nEmuE",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-FUV6SSYK.mjs": "Mad/q9MtDLc",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-FUV6SSYK.mjs.map": "9IFojZihDyA",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-GL53E3WX.mjs": "9h+ZBYosWsE",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-GL53E3WX.mjs.map": "tuOLJO1zLK4",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-KBYJ7EGZ.mjs": "1kJKAQ0O39Y",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-KBYJ7EGZ.mjs.map": "wUUraiFfDE0",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-WZGQJWAS.mjs": "Y9pY3LOEHVY",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-WZGQJWAS.mjs.map": "LMPzUuAiOIM",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-YWPWLCTP.mjs": "ABVt9Vl1wiA",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/chunk-YWPWLCTP.mjs.map": "9Pwea9eleHQ",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/crypto.node-5HPPZ5PO.mjs": "Hosiis4RK5g",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/crypto.node-5HPPZ5PO.mjs.map": "f+DirqJ/vQY",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/crypto.node-OZIG7C7V.mjs": "xL7AWEo5LhA",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/crypto.node-OZIG7C7V.mjs.map": "0b4tlwmkM3g",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/esm-HF64XN43.mjs": "/ASyNSMg03k",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/esm-HF64XN43.mjs.map": "CYqZQcavdAI",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/esm-ZLNRJQQ7.mjs": "dSrMJhuKXaA",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/esm-ZLNRJQQ7.mjs.map": "CSvtQ8IwLEk",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-bsd-CQRW3DPG.mjs": "244piLhuSIA",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-bsd-CQRW3DPG.mjs.map": "dIKKZ8MMNl8",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-darwin-VNZGFVBR.mjs": "960+ecDyqc0",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-darwin-VNZGFVBR.mjs.map": "xJrfS7fTZLk",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-linux-TYVV4ZLT.mjs": "Mu4BzqEE9PY",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-linux-TYVV4ZLT.mjs.map": "iGLn8Cz4sPg",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-unsupported-5IRX77GI.mjs": "Ca/HGT5QNLM",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-unsupported-5IRX77GI.mjs.map": "L7KXQNW7Eqw",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-win-KAUWWGCN.mjs": "9b/UQB1v9SE",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/getMachineId-win-KAUWWGCN.mjs.map": "O6wx6Q5hFOU",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger.config.mjs": "3zxxGUd+AiU",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger.config.mjs.map": "xNu+KdgMp7I",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger/design-agent.mjs": "bYoXSDRoC9E",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger/design-agent.mjs.map": "BTwoCTuDlXs",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger/generate-spec.mjs": "hsVMl3j7JkY",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/ghost ai/ghost-ai/trigger/generate-spec.mjs.map": "46OTaj667Oc",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/lib-IHTIXJFE.mjs": "VPMiu1FWrbA",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/lib-IHTIXJFE.mjs.map": "IQ5hKkUp9+M",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/query_compiler_fast_bg.postgresql-QMWVX7FC.mjs": "8bTOcbcbOic",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/query_compiler_fast_bg.postgresql-QMWVX7FC.mjs.map": "O+haTGBnK5U",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/query_compiler_fast_bg.postgresql.wasm-base64-A6F5D2GC.mjs": "UHNwQfXtuhs",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/query_compiler_fast_bg.postgresql.wasm-base64-A6F5D2GC.mjs.map": "OVn+cQqsbqY",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/s2s-3ZRIPYYD.mjs": "+6xdP4AKcy8",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/s2s-3ZRIPYYD.mjs.map": "cMXIJWjI/3w",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-GSZOBFWR.mjs": "kKYQj+1T5dU",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-GSZOBFWR.mjs.map": "Ork2QtNy8Ls",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-UBVB2SNH.mjs": "BxC+ksh1wS4",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-UBVB2SNH.mjs.map": "SXQYe2vyA2o",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-util-5YHFLCIE.mjs": "dTrzkIwjk3k",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-util-5YHFLCIE.mjs.map": "0b4tlwmkM3g",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-util-JXNJEGOZ.mjs": "aS941uunAe0",
+    "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/token-util-JXNJEGOZ.mjs.map": "0b4tlwmkM3g"
+  },
+  "outputPath": "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS",
+  "packageVersion": "4.4.6",
+  "runWorkerEntryPoint": "/Users/prashanadhikari/ghost ai/ghost-ai/.trigger/tmp/build-BGcXRS/.npm/_npx/f51a09bd0abf5f10/node_modules/trigger.dev/dist/esm/entryPoints/dev-run-worker.mjs",
+  "runtime": "node",
+  "sources": {
+    "package.json": {
+      "contentHash": "f2c25f23e873f9fe0117073cfb3b07f0",
+      "contents": "eJyNVMty4yAQvPsrXD4H9Fi/kpMP+x2uwkBk1ghUgGS7Uvn3HR6SseNUcoPuZhh6ZviYzecLRVq+eJsvmqO2DhGxePHowI0VWnmixBUuI9oZMRDn5c70PECWGtE5C9AHbAFgfPCnFL+4uV+/TPCbM6JpuAl0d5mnLQZqJyGsvT9w8Dq40bYkx1vRmJjDSCYERJ3U11F36IVkUyZxlyjriHETFXeJkkIFhtuwAvAzPBNic8W4ooJnb90RgSw7FY3WjQwp7f/gEm9XY7jdgViOelEYTmgIvK/wKtnpeSq5ORU+j3820Bug6we6F+lktcbVxEkx8IPU9GQLKgWPecP9dZnFz0RKM/6D5JblDxr0LvX5V8KU+4NMg5tG946bIlqIOqMHwWJz7Gtc5epY54Iw0sEJ1DXJqe1XTebEPZ81W8rsqPUper7ES7x+qoTMnihgOCiXBbzzkNLNS3q5enPyisNzqpuASmItGogRRFGOSO+O2gh3DdoSb24lptJeRj9uKNOOqyFG3kBeU7fInoKDKG81EEz3+ibzMDRRjTcjmszc4jpLcQpRvYJ2eQcjptvvqJaYE9NnFW+/fRx+5o6EUZXMzO1wRMizUAy13DRjg64z/oyIEi0MOKLWpnctgc9mc/j7fDzH2HCw6OB7GwMsnxZ7+jEeG+La8Wx86vKBuVmYN23ksmK8PqNGNzM6fT0efMAQ1epdNOibSoYJ+Nr6mQn3j3epu6CFskqG5MKnHshV8Hn2OfsPlpKkiA=="
+    },
+    "trigger.config.ts": {
+      "contentHash": "19730140a98493947a9ae978270c0ee8",
+      "contents": "eJxtj0FLxDAQhe/5FWNOu1CShQUP3Yuw1kUvStmbyBKbaY1ukiVJS6H0v5u0XUTxNvN47803Sl+sCzCAxFoZ3FtTqwZGqJ3VQO+CU02DjknsuJdfvNvSHVHXzMUpr0XRBzReWfN/7L1VZ8nxavJ8TsUegv1UFE+L9hx+IawGArHffmIV8jRU6D1D07Fj+Xg4FOXppXx+KvbHU1k83GTR7FoTlMYcqLESaZKkcj6HV8r4AkTfkqxFf986ESJNDtvbzSaJE2YO6SzAD22MTwr8fXY1LDqArz5Qi3h4tvB5Z8uf2eIb1/M0IYwZGdc78g3dyXpe"
+    },
+    "trigger/design-agent.ts": {
+      "contentHash": "9ce251ce958142598ce096b76e521508",
+      "contents": "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"
+    },
+    "trigger/generate-spec.ts": {
+      "contentHash": "f1d89fc4646f2dcb4ca37e296de8392a",
+      "contents": "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"
+    },
+    "tsconfig.json": {
+      "contentHash": "02fc19ad21338c2ab820a70136310db4",
+      "contents": "eJxtUctOwzAQvOcrIh+jNgEuSJyQUA9UVEhwrCrkxKvW1C/Zm1JU5d+xHSeQlNNqZnbXM+tLluek0dJwAfbVINfKkYf84mkvILV7QI/J6v3u5vaeLHpe8NqTW8K0JIs8lJIjWFoLCBicgjOSXeqmQuivdViLtoVEuiM3L7x+OkBznCloeYNTTumV5DMO3EazVsCz8k9rMxVllILzZGbCv4HTog1hQ0fdKubTDy02iCdYO602w5Y/m7lXKQLrtVmqT3cOGy3QBpcBDEOqsSBBIRXTASPaPY8n30YiT6fvU1MZI8QAie5iHU5rKB5+/8sTj1URf6b0dZcNA11oDyZEy2B8K+5dgjqVrEQ3WC2KqriGY5IyDFX4bcBVs9ZeYnD6X45Qepwl/wTOoyH/www+ZLrpLuuyHxtdtQk="
+    }
+  },
+  "target": "dev"
+}
